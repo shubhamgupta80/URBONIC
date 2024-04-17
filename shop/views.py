@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Contact
 from django.contrib import messages
+from django.core.mail import send_mail
+from .forms import ReviewForm
+from .models import *
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
+
 
 # Create your views here.
 def contact_view(request):
@@ -19,3 +25,14 @@ def contact_view(request):
         else:
             messages.error(request, "Please fill in all the fields!")
     return render(request, 'contact.html')
+
+def review_view(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your review has been submitted successfully!")
+            return redirect('review')
+    else:
+        form = ReviewForm()
+    return render(request, 'review.html', {'form': form})
