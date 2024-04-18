@@ -9,7 +9,7 @@ from django_ckeditor_5.widgets import CKEditor5Widget
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['product', 'user', 'description', 'rating']
+        fields = ['description', 'rating']
 
 class ArticleForm(forms.ModelForm):
     class Meta:

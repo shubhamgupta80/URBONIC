@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
-from shop.views import contact_view
+from shop.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,6 +16,9 @@ urlpatterns = [
     path('base', TemplateView.as_view(template_name='base.html'), name='base'),
     path('pricing', TemplateView.as_view(template_name='pricing.html'), name='pricing'),
     path('about', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('review', review_view, name='review'),
+    path('login', TemplateView.as_view(template_name='login.html'), name='login'),
+
     
 ]
 

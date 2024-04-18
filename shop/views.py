@@ -26,13 +26,16 @@ def contact_view(request):
             messages.error(request, "Please fill in all the fields!")
     return render(request, 'contact.html')
 
+@login_required
 def review_view(request):
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, )
         if form.is_valid():
-            form.save()
+            model = form.save()
+            model.user = request.user
+            model.save()
             messages.success(request, "Your review has been submitted successfully!")
             return redirect('review')
     else:
         form = ReviewForm()
-    return render(request, 'review.html', {'form': form})
+    return render(request, 'reviewform.html', {'form': form})
