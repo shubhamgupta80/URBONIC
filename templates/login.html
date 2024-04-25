@@ -1,96 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="user.css">
-  <title>Urbonic</title>
-
-  <!-- additional css -->
-  <style>
-    @import url();
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body{
-    background-color:#617050;
-    font-family: 'Poppins', sans-serif;
-}
-
-form{
-    width: 24%;
-    background-color: white;
-    padding: 50px;
-    border-radius: 20px;
-    margin-top: 150px;
-}
-.btn-primary{
-    width: 100%;
-    border: none;
-    border-radius: 50px;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(75,14,154,1) 35%, rgba(0,212,255,1) 100%);
-    
-}
-.form-control{
-    color: rgba(0,0,0,.87);
-    border-bottom-color: rgba(0,0,0,.42);
-    box-shadow: none !important;
-    border: none;
-    border-bottom: 1px solid;
-    border-radius: 4px 4px 0 0;
-}
-h4{ 
-    background-image:url(urbonic-high-resolution-logo-transparent\ \(1\).png);
-    font-size: 2rem;
-    font-weight: 700;
-    color: rgb(129, 175, 61);
-}
-.form-label{
-    font-family: 800 !important;
-}
-@media only screen and (max-width:600px){
-    form{
-        width: 100% !important;
-    }
-}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBONIC</title>
+    <link rel="stylesheet" href="/static/css/login.css">
 </head>
 
 <body>
-  <div class="container-fluid">
-    <form class="mx-auto">
-      <img src="urbonic-high-resolution-logo-transparent (1).png" height="100" width="260" alt="#">
-      <div class="mb-3 mt-5">
-        <label for="exampleInputEmail1" class="form-label">User Name</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your username">
-
+    
+      <div class="content">
+        <!-- Content Goes Here -->
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter your password">
-        <div id="emailHelp" class="form-text mt-3">Forget Password?</div>
-      </div>
+    <div id="particles-js" class="snow"></div>
 
-      <button type="submit" class="btn btn-primary mt-4">Login</button>
-    </form>
-  </div>
+    <main>
+        <div class="left-side"></div>
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+        <div class="right-side">
+            <form>
+                <div class="btn-group">
+                    <button class="btn">
+                        <img class="logo"
+                            src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/d1c98974-c62d-4071-8bd2-ab859fc5f4e9"
+                            alt="" />
+                        <span>Sign in with Google</span>
+                    </button>
+                    <button class="btn">
+                        <img class="logo"
+                            src="https://github.com/ecemgo/mini-samples-great-tricks/assets/13468728/59c1561b-8152-4d05-b617-0680a7629a0e"
+                            alt="" />
+                        <span>Sign in with Apple</span>
+                    </button>
+                </div>
 
+                <div class="or">OR</div>
 
+                <label for="User name">Username</label>
+                <input type="text" placeholder=" Enter Username" name="User name" required />
+
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter Password" name="password" required />
+
+                <button type="submit" class="login-btn">Sign in</button>
+                <div class="links">
+                    <a href="#">Forgot password?</a>
+                    <a href="#">Do not have an account?</a>
+                    <a href="http://127.0.0.1:8000/">For More></a>
+                    <script src="/static/js/login.js"></script>
+                </div>
+            </form>
+        </div>
+    </main>
 </body>
-
 </html>
