@@ -449,8 +449,46 @@
 
       </div>
     </section><!-- End Gallery Section -->
+    <!-- articles  -->
+    <section id="why-us" class="why-us section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="why-box">
+              <h3>Recent Articles</h3>
+              <p>
+
+              </p>
+              <div class="text-center">
+                <a href="#" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              </div>
+            </div>
+          </div><!-- End Why Box -->
+
+          <div class="col-lg-8 d-flex align-items-center">
+            <div class="row gy-4">
 
 
+              {% for item in articles %}
+              <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="icon-box d-flex flex-column justify-content-center align-items-center">
+                  <i class="bi bi-inboxes"></i>
+                  <h5>{{item.title}}</h5>
+                  <a href="#">View</a>
+                </div>
+              </div><!-- End Icon Box -->
+              {% endfor %}
+
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

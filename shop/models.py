@@ -23,15 +23,15 @@ class Contact(models.Model):
     
     
 class Product(models.Model):
-    title = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='Product')
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    available = models.BooleanField(default=True)
-    best_seller = models.BooleanField(default=False)
-    seller = models.CharField(max_length=50)
-    created_at = models.DateTimeField(auto_now_add=True)
+        title = models.CharField(max_length=50)
+        image = models.ImageField(upload_to='Product')
+        description = models.TextField()
+        price = models.DecimalField(max_digits=10, decimal_places=2)
+        category = models.ForeignKey(Category, on_delete=models.CASCADE)
+        available = models.BooleanField(default=True)
+        best_seller = models.BooleanField(default=False)
+        seller = models.CharField(max_length=50)
+        created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.title

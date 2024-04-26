@@ -9,7 +9,7 @@ from shop.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', home_view, name='home'),
     path('page', TemplateView.as_view(template_name='page1.html'), name='page1'),
     path('vendor/login', TemplateView.as_view(template_name='login.html'), name='vendor_login'),
     path('contact', contact_view , name='contact'),

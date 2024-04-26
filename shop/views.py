@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import login_required
 
 
 
+def home_view(request):
+    articles = Article.objects.all()[:3]
+    products = Product.objects.all()[:9]
+    return render(request, 'index.html', {'articles': articles, 'products': products})
+
+
 # Create your views here.
 def contact_view(request):
     if request.method == 'POST':
