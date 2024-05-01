@@ -52,14 +52,14 @@ class Testimonial(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.title
+        return self.description
     
 class Gallery(models.Model):
     image = models.ImageField(upload_to='Product')
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.created_at
+        return self.image.url
     
 
 from django_ckeditor_5.fields import CKEditor5Field
