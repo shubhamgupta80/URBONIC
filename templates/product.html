@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 
-{% block Flora %}
+{% block URBONIC %}
 Take Subscription
 {% endblock %}
 
@@ -11,7 +11,7 @@ Take Subscription
         <form action="" method="post">
             {% csrf_token %}
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
-                {% for item in flowers %}
+                {% for item in Products %}
                 <div class="col" for="item_{{item.id}}">
                     <div class="card shadow-sm">
                         <img class="card-img" src="{{ item.image.url }}" alt="Card image cap" style="height: 300px;">
@@ -20,9 +20,6 @@ Take Subscription
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-outline-primary">
                                         {{item.season_type|title}}
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-success">
-                                        {{item.maintainance_type|title}}
                                     </button>
                                 </div>
                                 <small class="text-body-secondary fs-5">Rs: {{item.price|floatformat:2}}</small>
@@ -44,7 +41,7 @@ Take Subscription
                             <label for="item_{{item.id}}" class="w-100 ">
                                 <div class="d-flex align-items-center ">
                                     <div class="">
-                                        Add to Subscription
+                                        Purchase Item
                                     </div>
                                     <div class="ms-auto">
                                         <div class="form-check">
@@ -63,7 +60,7 @@ Take Subscription
                 {% endfor %}
             </div>
             <div class="row my-3">
-                <button type="submit" class="btn btn-primary">Complete Subscription</button>
+                <button type="submit" class="btn btn-primary">Purchase Done</button>
             </div>
         </form>
     </div>
