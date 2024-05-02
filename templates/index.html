@@ -187,71 +187,23 @@
 
             <div class="row gy-5">
 
+
+              {% for item in products %}
               <div class="col-lg-4 menu-item">
-                <a href="https://images.pexels.com/photos/6231726/pexels-photo-6231726.jpeg?auto=compress&cs=tinysrgb&w=600"
+                <a href="{{item.image.url}}"
                   class="glightbox"><img
-                    src="https://images.pexels.com/photos/6231726/pexels-photo-6231726.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    src="{{item.image.url}}"
                     class="menu-img img-fluid" alt=""></a>
-                <h4>Hand Tool</h4>
+                <h4>{{item.title}}</h4>
                 <p class="price">
-                  Rs.199
+                  Rs.{{item.price}}
                 </p>
               </div><!-- Menu Item -->
+              {% endfor %}
 
-              <div class="col-lg-4 menu-item">
-                <a href="https://images.pexels.com/photos/19604443/pexels-photo-19604443/free-photo-of-red-flowerpot-hanging-on-a-wire.jpeg?auto=compress&cs=tinysrgb&w=600"
-                  class="glightbox"><img
-                    src="https://images.pexels.com/photos/19604443/pexels-photo-19604443/free-photo-of-red-flowerpot-hanging-on-a-wire.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    class="menu-img img-fluid" alt=""></a>
-                <h4>Small Hanging Pots</h4>
-                <p class="price">
-                  Rs.259
-                </p>
-              </div><!-- Menu Item -->
 
-              <div class="col-lg-4 menu-item">
-                <a href="https://images.pexels.com/photos/6508404/pexels-photo-6508404.jpeg?auto=compress&cs=tinysrgb&w=600"
-                  class="glightbox"><img
-                    src="https://images.pexels.com/photos/6508404/pexels-photo-6508404.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    class="menu-img img-fluid" alt=""></a>
-                <h4>Water Spray</h4>
-                <p class="price">
-                  Rs. 349
-                </p>
-              </div><!-- Menu Item -->
 
-              <div class="col-lg-4 menu-item">
-                <a href="https://cdn.pixabay.com/photo/2015/05/12/12/28/plant-763965_640.jpg" class="glightbox"><img
-                    src="https://cdn.pixabay.com/photo/2015/05/12/12/28/plant-763965_640.jpg" class="menu-img img-fluid"
-                    alt=""></a>
-                <h4>Pots</h4>
-                <p class="price">
-                  Rs.299
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="https://images.pexels.com/photos/4750384/pexels-photo-4750384.jpeg?auto=compress&cs=tinysrgb&w=600"
-                  class="glightbox"><img
-                    src="https://images.pexels.com/photos/4750384/pexels-photo-4750384.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    class="menu-img img-fluid" alt=""></a>
-                <h4>Gardening Seeds</h4>
-                <p class="price">
-                  Rs.149/gm
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="https://images.pexels.com/photos/3971211/pexels-photo-3971211.jpeg?auto=compress&cs=tinysrgb&w=600"
-                  class="glightbox"><img
-                    src="https://images.pexels.com/photos/3971211/pexels-photo-3971211.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    class="menu-img img-fluid" alt=""></a>
-                <h4>Farming Tool</h4>
-                <p class="price">
-                  Rs.499
-                </p>
-              </div><!-- Menu Item -->
-
+              <a href="" class="btn btn-danger">View all products</a>
             </div>
           </div><!-- End Starter Menu Content -->
 

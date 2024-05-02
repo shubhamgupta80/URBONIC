@@ -18,8 +18,6 @@ urlpatterns =[
     path('register', TemplateView.as_view(template_name='register.html'), name='register'),
     path('vendor/login',vendor_login_view, name='vendor_login'),
     path('vendor/register', vendor_register_view, name='vendor_register'),
-    path('user/register', user_register_view, name='user_register'),
-    path('user/login', user_login_view, name='user_login'),
     path('logout', logout_view, name='logout'),
     path('contact', contact_view , name='contact'),
     ]
