@@ -12,7 +12,7 @@ urlpatterns =[
     path('', home_view, name='home'),
     path('page', TemplateView.as_view(template_name='page1.html'), name='page1'),
     path('pricing', TemplateView.as_view(template_name='pricing.html'), name='pricing'),
-    path('about', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('review', review_view, name='review'),
     path('login', TemplateView.as_view(template_name='login.html'), name='login'),
     path('register', TemplateView.as_view(template_name='register.html'), name='register'),
@@ -20,6 +20,8 @@ urlpatterns =[
     path('vendor/register', vendor_register_view, name='vendor_register'),
     path('logout', logout_view, name='logout'),
     path('contact', contact_view , name='contact'),
+    path('products/all', product_view, name="products"),
+
     ]
 
 if settings.DEBUG:

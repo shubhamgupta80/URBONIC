@@ -120,3 +120,7 @@ def vendor_register_view(request):
             messages.error(request, "Please fill in all the fields!")
     return render(request, 'vendor_register.html')
 
+def product_view(request):
+    products = Product.objects.all()   
+    return render(request, 'products.html', {'products': products}) 
+
