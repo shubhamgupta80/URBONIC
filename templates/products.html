@@ -13,34 +13,20 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 	<style>
 		body {
-			background: #e2eaef;
+			background: #94ba87;
 			font-family: "Open Sans", sans-serif;
 		}
 
 		h2 {
 			color: #000;
-			font-size: 26px;
-			font-weight: 300;
+			font-size: 30px;
+			font-weight: 500;
 			text-align: center;
-			text-transform: uppercase;
+			text-transform: arial;
 			position: relative;
 			margin: 30px 0 60px;
 		}
-
-		h2::after {
-			content: "";
-			width: 100px;
-			position: absolute;
-			margin: 0 auto;
-			height: 4px;
-			border-radius: 1px;
-			background: #7ac400;
-			left: 0;
-			right: 0;
-			bottom: -20px;
-		}
-
-		.carousel {
+         .carousel {
 			margin: 50px auto;
 			padding: 0 70px;
 		}
@@ -220,27 +206,22 @@
 <body>
 	<div class="container-xl">
 		<div class="row">
-			<div class="col-md-12">
-				<h2>Featured <b>Products</b></h2>
+			<div class="col-md-16">
+				<h2><b> Featured Products</b></h2>
 				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
 					<!-- Carousel indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>
+
 					<!-- Wrapper for carousel items -->
 					<div class="carousel-inner">
 						<div class="item carousel-item active">
 							<div class="row">
 
 								{% for item in products %}
-								<div class="col-sm-3 mb-4">
+								<div class="col-sm-4 mb-4">
 									<div class="thumb-wrapper">
 										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
 										<div class="img-box">
-											<img src="{{item.image.url}}"
-												class="img-fluid" alt="">
+											<img src="{{item.image.url}}" class="img-fluid" alt="">
 										</div>
 										<div class="thumb-content">
 											<h4>{{product.title}}</h4>
@@ -253,7 +234,7 @@
 													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
 												</ul>
 											</div>
-											<p class="item-price"><strike>Rs.2100</strike> <b>Rs.{{item.price}}</b></p>
+											<p class="item-price"><b>Rs.{{item.price}}</b></p>
 											<a href="http://127.0.0.1:5501/table-06/index.html"
 												class="btn btn-primary">Add to Cart</a>
 										</div>
@@ -266,12 +247,7 @@
 						</div>
 					</div>
 					<!-- Carousel controls -->
-					<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-						<i class="fa fa-angle-left"></i>
-					</a>
-					<a class="carousel-control-next" href="#myCarousel" data-slide="next">
-						<i class="fa fa-angle-right"></i>
-					</a>
+
 				</div>
 			</div>
 		</div>
