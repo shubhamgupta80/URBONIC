@@ -21,6 +21,7 @@ urlpatterns =[
     path('logout', logout_view, name='logout'),
     path('contact', contact_view , name='contact'),
     path('products/all', product_view, name="products"),
+    path('article/<int:pk>',article_view , name="articles"),
 
     ]
 

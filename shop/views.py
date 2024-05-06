@@ -124,3 +124,6 @@ def product_view(request):
     products = Product.objects.all()   
     return render(request, 'products.html', {'products': products}) 
 
+def article_view(request, pk):
+    article = Article.objects.get(pk=pk)
+    return render(request, 'article.html', {'article': article})
