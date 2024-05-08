@@ -11,247 +11,348 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- <link rel="stylesheet" href="style.css"> -->
 	<style>
 		body {
-			background: #94ba87;
-			font-family: "Open Sans", sans-serif;
+			font-family: monospace;
+			overflow-x: hidden;
+			font-synthesis: 15px;
 		}
 
-		h2 {
-			color: #000;
-			font-size: 30px;
-			font-weight: 500;
-			text-align: center;
-			text-transform: arial;
+		a {
+			text-decoration: none;
+		}
+
+		.container {
+			width: 1200px;
+			margin: auto;
+			max-width: 90%;
+			transition: transform 1s;
+		}
+
+		header img {
+			width: 60px;
+		}
+
+		header {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		header .iconCart {
 			position: relative;
-			margin: 30px 0 60px;
-		}
-         .carousel {
-			margin: 50px auto;
-			padding: 0 70px;
+			z-index: 1;
 		}
 
-		.carousel .item {
-			color: #747d89;
-			min-height: 325px;
-			text-align: center;
-			overflow: hidden;
-		}
-
-		.carousel .thumb-wrapper {
-			padding: 25px 15px;
-			background: #fff;
-			border-radius: 6px;
-			text-align: center;
-			position: relative;
-			box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-		}
-
-		.carousel .item .img-box {
-			height: 120px;
-			margin-bottom: 20px;
-			width: 100%;
-			position: relative;
-		}
-
-		.carousel .item img {
-			max-width: 100%;
-			max-height: 100%;
-			display: inline-block;
+		header .totalQuantity {
 			position: absolute;
-			bottom: 0;
-			margin: 0 auto;
-			left: 0;
+			top: 0;
 			right: 0;
-		}
-
-		.carousel .item h4 {
-			font-size: 18px;
-		}
-
-		.carousel .item h4,
-		.carousel .item p,
-		.carousel .item ul {
-			margin-bottom: 5px;
-		}
-
-		.carousel .thumb-content .btn {
-			color: #7ac400;
-			font-size: 11px;
-			text-transform: uppercase;
+			font-size: x-large;
+			background-color: #b31010;
+			width: 40px;
+			height: 40px;
+			color: #fff;
 			font-weight: bold;
-			background: none;
-			border: 1px solid #7ac400;
-			padding: 6px 14px;
-			margin-top: 5px;
-			line-height: 16px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%;
+			transform: translateX(20px);
+		}
+
+		.listProduct {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 20px;
+		}
+
+		.listProduct .item img {
+			width: 100%;
+			height: 430px;
+			object-fit: cover;
+		}
+
+		.listProduct .item {
+			position: relative;
+		}
+
+		.listProduct .item h2 {
+			font-weight: 700;
+			font-size: x-large;
+		}
+
+		.listProduct .item .price {
+			font-size: x-large;
+		}
+
+		.listProduct .item button {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			background-color: #e6572c;
+			color: #fff;
+			width: 50%;
+			border: none;
+			padding: 20px 30px;
+			box-shadow: 0 10px 50px #000;
+			cursor: pointer;
+			transform: translateX(-50%) translateY(100px);
+			opacity: 0;
+		}
+
+		.listProduct .item:hover button {
+			transition: 0.5s;
+			opacity: 1;
+			transform: translateX(-50%) translateY(0);
+		}
+
+		.cart {
+			color: #fff;
+			position: fixed;
+			width: 400px;
+			max-width: 80vw;
+			height: 100vh;
+			background-color: #0E0F11;
+			top: 0px;
+			right: -100%;
+			display: grid;
+			grid-template-rows: 50px 1fr 50px;
+			gap: 20px;
+			transition: right 1s;
+		}
+
+		.cart .buttons .checkout {
+			background-color: #E8BC0E;
+			color: #000;
+		}
+
+		.cart h2 {
+			color: #E8BC0E;
+			padding: 20px;
+			height: 30px;
+			margin: 0;
+		}
+
+
+		.cart .listCart .item {
+			display: grid;
+			grid-template-columns: 50px 1fr 70px;
+			align-items: center;
+			gap: 20px;
+			margin-bottom: 20px;
+
+		}
+
+		.cart .listCart img {
+			width: 100%;
+			height: 70px;
+			object-fit: cover;
+			border-radius: 10px;
+		}
+
+		.cart .listCart .item .name {
+			font-weight: bold;
+		}
+
+		.cart .listCart .item .quantity {
+			display: flex;
+			justify-content: end;
+			align-items: center;
+		}
+
+		.cart .listCart .item .quantity span {
+			display: block;
+			width: 50px;
+			text-align: center;
+		}
+
+		.cart .listCart {
+			padding: 20px;
+			overflow: auto;
+		}
+
+		.cart .listCart::-webkit-scrollbar {
+			width: 0;
+		}
+
+		.cart .buttons {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			text-align: center;
+		}
+
+		.cart .buttons div {
+			background-color: #000;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.cart .buttons a {
+			color: #fff;
+			text-decoration: none;
+		}
+
+		.checkoutLayout {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 50px;
+			padding: 20px;
+		}
+
+		.checkoutLayout .right {
+			background-color: #5358B3;
+			border-radius: 20px;
+			padding: 40px;
+			color: #fff;
+		}
+
+		.checkoutLayout .right .form {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 20px;
+			border-bottom: 1px solid #7a7fe2;
+			padding-bottom: 20px;
+		}
+
+		.checkoutLayout .form h1,
+		.checkoutLayout .form .group:nth-child(-n+3) {
+			grid-column-start: 1;
+			grid-column-end: 3;
+		}
+
+		.checkoutLayout .form input,
+		.checkoutLayout .form select {
+			width: 100%;
+			padding: 10px 20px;
+			box-sizing: border-box;
+			border-radius: 20px;
+			margin-top: 10px;
+			border: none;
+			background-color: #6a6fc9;
+			color: #fff;
+		}
+
+		.checkoutLayout .right .return .row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 10px;
+		}
+
+		.checkoutLayout .right .return .row div:nth-child(2) {
+			font-weight: bold;
+			font-size: x-large;
+		}
+
+		.buttonCheckout {
+			width: 100%;
+			height: 40px;
+			border: none;
+			border-radius: 20px;
+			background-color: #49D8B9;
+			margin-top: 20px;
+			font-weight: bold;
+			color: #fff;
+
+
+		}
+
+		.returnCart h1 {
+			border-top: 1px solid #eee;
+			padding: 20px 0;
+		}
+
+		.returnCart .list .item img {
+			height: 80px;
+		}
+
+		.returnCart .list .item {
+			display: grid;
+			grid-template-columns: 80px 1fr 50px 80px;
+			align-items: center;
+			gap: 20px;
+			margin-bottom: 30px;
+			padding: 0 10px;
+			box-shadow: 0 10px 20px #5555;
 			border-radius: 20px;
 		}
 
-		.carousel .thumb-content .btn:hover,
-		.carousel .thumb-content .btn:focus {
-			color: #fff;
-			background: #7ac400;
-			box-shadow: none;
-		}
-
-		.carousel .thumb-content .btn i {
-			font-size: 14px;
+		.returnCart .list .item .name,
+		.returnCart .list .item .returnPrice {
+			font-size: large;
 			font-weight: bold;
-			margin-left: 5px;
-		}
-
-		.carousel .item-price {
-			font-size: 13px;
-			padding: 2px 0;
-		}
-
-		.carousel .item-price strike {
-			opacity: 0.7;
-			margin-right: 5px;
-		}
-
-		.carousel-control-prev,
-		.carousel-control-next {
-			height: 44px;
-			width: 40px;
-			background: #7ac400;
-			margin: auto 0;
-			border-radius: 4px;
-			opacity: 0.8;
-		}
-
-		.carousel-control-prev:hover,
-		.carousel-control-next:hover {
-			background: #78bf00;
-			opacity: 1;
-		}
-
-		.carousel-control-prev i,
-		.carousel-control-next i {
-			font-size: 36px;
-			position: absolute;
-			top: 50%;
-			display: inline-block;
-			margin: -19px 0 0 0;
-			z-index: 5;
-			left: 0;
-			right: 0;
-			color: #fff;
-			text-shadow: none;
-			font-weight: bold;
-		}
-
-		.carousel-control-prev i {
-			margin-left: -2px;
-		}
-
-		.carousel-control-next i {
-			margin-right: -4px;
-		}
-
-		.carousel-indicators {
-			bottom: -50px;
-		}
-
-		.carousel-indicators li,
-		.carousel-indicators li.active {
-			width: 10px;
-			height: 10px;
-			margin: 4px;
-			border-radius: 50%;
-			border: none;
-		}
-
-		.carousel-indicators li {
-			background: rgba(0, 0, 0, 0.2);
-		}
-
-		.carousel-indicators li.active {
-			background: rgba(0, 0, 0, 0.6);
-		}
-
-		.carousel .wish-icon {
-			position: absolute;
-			right: 10px;
-			top: 10px;
-			z-index: 99;
-			cursor: pointer;
-			font-size: 16px;
-			color: #abb0b8;
-		}
-
-		.carousel .wish-icon .fa-heart {
-			color: #ff6161;
-		}
-
-		.star-rating li {
-			padding: 0;
-		}
-
-		.star-rating i {
-			font-size: 14px;
-			color: #ffc000;
 		}
 	</style>
-	<script>
+	<!-- <script>
 		$(document).ready(function () {
 			$(".wish-icon i").click(function () {
 				$(this).toggleClass("fa-heart fa-heart-o");
 			});
 		});	
-	</script>
+	</script> -->
 </head>
 
 <body>
-	<div class="container-xl">
-		<div class="row">
-			<div class="col-md-16">
-				<h2><b> Featured Products</b></h2>
-				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-					<!-- Carousel indicators -->
+	<div class="container">
+		<header>
+			<h1>LIST PRODUCT</h1>
+			<div class="iconCart">
+				<img src="icon.png">
+				<div class="totalQuantity">0</div>
+			</div>
+		</header>
 
-					<!-- Wrapper for carousel items -->
-					<div class="carousel-inner">
-						<div class="item carousel-item active">
-							<div class="row">
+		<div class="listProduct">
+			{% for item in products %}
 
-								{% for item in products %}
-								<div class="col-sm-4 mb-4">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="{{item.image.url}}" class="img-fluid" alt="">
-										</div>
-										<div class="thumb-content">
-											<h4>{{product.title}}</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><b>Rs.{{item.price}}</b></p>
-											<a href="http://127.0.0.1:5501/table-06/index.html"
-												class="btn btn-primary">Add to Cart</a>
-										</div>
-									</div>
-								</div>
-								{% endfor %}
+			<div class="item">
+				<img src="{{item.image.url}}" alt="">
+				<h2>{{item.title}}</h2>
+				<div class="price">Rs. {{item.price}}</div>
+				<button>Add To Cart</button>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
 
+	<div class="cart">
+		<h2>
+			CART
+		</h2>
 
-							</div>
-						</div>
-					</div>
-					<!-- Carousel controls -->
+		<div class="listCart">
 
+			<div class="item">
+				<img src="images/1.webp">
+				<div class="content">
+					<div class="name">CoPilot / Black / Automatic</div>
+					<div class="price"><br>Rs.{{item.price}}</div>
 				</div>
+				<div class="quantity">
+					<button>-</button>
+					<span class="value">3</span>
+					<button>+</button>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div class="buttons">
+			<div class="close">
+				CLOSE
+			</div>
+			<div class="checkout">
+				<a href="checkout.html">CHECKOUT</a>
 			</div>
 		</div>
 	</div>
+	<script src="/static/js/app.js"></script>
 </body>
 
 </html>
