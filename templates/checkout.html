@@ -4,29 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
 </head>
 <body>
     
 <div class="container">
     <div class="checkoutLayout">
-
-        
         <div class="returnCart">
             <a href="/">keep shopping</a>
             <h1>List Product in Cart</h1>
             <div class="list">
 
-                <div class="item">
-                    <img src="images/1.webp">
-                    <div class="info">
-                        <div class="name">PRODUCT 1</div>
-                        <div class="price">$22/1 product</div>
-                    </div>
-                    <div class="quantity">5</div>
-                    <div class="returnPrice">$433.3</div>
-                </div>
-
+                
             </div>
         </div>
 
@@ -82,7 +73,33 @@
 </div>
 
 
-<script src="checkout.js"></script>
+<!-- <script src="checkout.js"></script> -->
+<script>
+    $(document).ready(function() {
+        var userId = "{{request.user.id}}"
+        var items = JSON.parse(localStorage.getItem(`items_${userId}`)) || [];
+        var totalQuantity = items.reduce((acc, item) => acc + parseInt(item.quantity), 0);
+        var totalPrice = items.reduce((acc, item) => acc + item.quantity * parseFloat(item.price.replace("Rs.", "")), 0);
+        $(".totalQuantity").text(totalQuantity);
+        $(".totalPrice").text(`Rs.${totalPrice}`);
+
+        // display
+        items.forEach(item => {
+            var itemElement = `
+                <div class="item">
+                    <img src="${item.img}">
+                    <div class="info">
+                        <div class="name">${item.name}</div>
+                        <div class="price">${item.price}</div>
+                    </div>
+                    <div class="quantity">${item.quantity}</div>
+                    <div class="returnPrice">Rs.${item.quantity * parseFloat(item.price.replace("Rs.", ""))}</div>
+                </div>
+            `;
+            $(".list").append(itemElement);
+        });
+    });
+</script>
 
 </body>
 </html>

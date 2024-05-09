@@ -19,7 +19,8 @@
         <div class="left-side"></div>
 
         <div class="right-side">
-            <form>
+            <form class="" method="post">
+                {% csrf_token %}
                 <div class="btn-group">
                     <button class="btn">
                         <img class="logo"
@@ -39,10 +40,7 @@
 
                 <label for="User name">Username</label>
                 <input type="text" placeholder=" Enter Username" name="username" required />
-                
-                <label for="email">Email</label>
-                <input type="email" placeholder=" Enter email" name="email" required />
-
+            
                 <label for="password">Password</label>
                 <input type="password" placeholder="Enter Password" name="password" required />
 

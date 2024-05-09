@@ -14,14 +14,16 @@ urlpatterns =[
     path('pricing', TemplateView.as_view(template_name='pricing.html'), name='pricing'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
     path('review', review_view, name='review'),
-    path('login', TemplateView.as_view(template_name='login.html'), name='login'),
-    path('register', TemplateView.as_view(template_name='register.html'), name='register'),
+    path('login', user_login_view, name='login'),
+    path('register', user_register_view, name='register'),
     path('vendor/login',vendor_login_view, name='vendor_login'),
     path('vendor/register', vendor_register_view, name='vendor_register'),
     path('logout', logout_view, name='logout'),
     path('contact', contact_view , name='contact'),
     path('products/all', product_view, name="products"),
-    path('article/<int:pk>',article_view , name="articles"),
+    path('article/<int:pk>',article_view , name="article"),
+    path('article/all', article_all_view, name="articles"),
+    path('checkout', checkout_view, name='checkout'),
 
     ]
 

@@ -1,1 +1,20 @@
-{{ article.text|safe}}
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h3>{{article.title}}</h3>
+                <div class="card">
+                    <div class="card-body">
+                        {{ article.text|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+    

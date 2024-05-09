@@ -11,7 +11,8 @@
     <!-- <source src="your-video-file.ogg" type="video/ogg"> -->
     Your browser does not support the video tag.
   </video>
- <form action="">
+ <form action="" method="post">
+  {% csrf_token %}
    <div class="container">
     <h3>Register here</h3>
     <label for="">Username</label> 

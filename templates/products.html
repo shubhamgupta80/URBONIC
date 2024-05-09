@@ -314,7 +314,7 @@
 				<img src="{{item.image.url}}" alt="">
 				<h2>{{item.title}}</h2>
 				<div class="price">Rs. {{item.price}}</div>
-				<button>Add To Cart</button>
+				<button class="addToCart">Add To Cart</button>
 			</div>
 			{% endfor %}
 		</div>
@@ -322,37 +322,114 @@
 
 	<div class="cart">
 		<h2>
-			CART
+			CART <span class="totalQuantity">0</span>
 		</h2>
-
+		<!-- clear -->
+		<!-- <div class="clear">
+			<button>CLEAR</button>
+		</div> -->
 		<div class="listCart">
-
-			<div class="item">
-				<img src="images/1.webp">
-				<div class="content">
-					<div class="name">CoPilot / Black / Automatic</div>
-					<div class="price"><br>Rs.{{item.price}}</div>
-				</div>
-				<div class="quantity">
-					<button>-</button>
-					<span class="value">3</span>
-					<button>+</button>
-				</div>
-			</div>
-
-
+			<!-- cart content -->
 		</div>
 
 		<div class="buttons">
 			<div class="close">
 				CLOSE
 			</div>
+			
 			<div class="checkout">
-				<a href="checkout.html">CHECKOUT</a>
+				<a href="{% url 'checkout' %}" class="checkout">CHECKOUT</a>
 			</div>
 		</div>
 	</div>
-	<script src="/static/js/app.js"></script>
+	<!-- <script src="/static/js/app.js"></script> -->
+	<script>
+		$(document).ready(function () {
+			// var cartItems = []
+			$(".iconCart").click(function () {
+				$(".cart").css("right", "0");
+			});
+
+			$(".cart .close").click(function () {
+				
+				$(".cart").css("right", "-100%");
+			});
+
+			$(".addToCart").click(function () {
+				var img = $(this).parent().find("img").attr("src");
+				var name = $(this).parent().find("h2").text();
+				var price = $(this).parent().find(".price").text();
+				var quantity = 1;
+				// cartItems.push({
+				// 	img: img,
+				// 	name: name,
+				// 	price: price,
+				// 	quantity: quantity
+				// });
+				var item = `
+				<div class="item">
+					<img src="${img}">
+					<div class="content">
+						<div class="name">${name}</div>
+						<div class="price">${price}</div>
+					</div>
+					<div class="quantity">
+						<button class="inc">-</button>
+						<span class="value">${quantity}</span>
+						<button class="dec">+</button>
+					</div>
+				</div>
+				`;
+
+				$(".listCart").append(item);
+
+				var totalQuantity = $(".listCart .item").length;
+				$(".totalQuantity").text(totalQuantity);
+			});
+			// increment
+			$(".listCart").on("click", ".inc", function () {
+				var value = $(this).parent().find(".value").text();
+				value = parseInt(value) - 1;
+				if (value < 1) {
+					value = 1;
+				}
+				$(this).parent().find(".value").text(value);
+			});
+			// decrement
+			$(".listCart").on("click", ".dec", function () {
+				var value = $(this).parent().find(".value").text();
+				value = parseInt(value) + 1;
+				$(this).parent().find(".value").text(value);
+			});
+			// save all items in localstorage and move to checkout page
+			$(".checkout").click(function () {
+				var userId = "{{request.user.id}}"
+				var items = [];
+				$(".listCart .item").each(function () {
+					var img = $(this).find("img").attr("src");
+					var name = $(this).find(".name").text();
+					var price = $(this).find(".price").text();
+					var quantity = $(this).find(".quantity .value").text();
+					items.push({
+						img: img,
+						name: name,
+						price: price,
+						quantity: quantity
+					});
+				});
+				localStorage.setItem(`items_${userId}`, JSON.stringify(items));
+				window.location.href = "{% url 'checkout' %}";
+			});
+			// clear cart
+			$(".clear").click(function(){
+				var userId = "{{request.user.id}}"
+				$(".listCart").empty();
+				$(".totalQuantity").text(0);
+				localStorage.removeItem(`items_${userId}`);
+			})
+		});
+
+	</script>
 </body>
 
 </html>

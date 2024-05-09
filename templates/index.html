@@ -428,7 +428,7 @@
                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
                   <i class="bi bi-inboxes"></i>
                   <h5>{{item.title}}</h5>
-                  <a href="#">View</a>
+                  <a href="{% url 'article' item.id %}">View</a>
                 </div>
               </div><!-- End Icon Box -->
               {% endfor %}
