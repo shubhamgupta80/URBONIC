@@ -130,6 +130,7 @@ def article_view(request, pk):
 
 def article_all_view(request):
     articles = Article.objects.all()
+    print(len(articles))
     return render(request, "articles.html", {
         'articles' : articles
     })

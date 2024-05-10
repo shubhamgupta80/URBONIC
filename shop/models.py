@@ -66,6 +66,7 @@ from django_ckeditor_5.fields import CKEditor5Field
 
 class Article(models.Model):
     title=models.CharField('Title', max_length=200)
+    image = models.ImageField(upload_to='article', default="logo1.png")
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     text=CKEditor5Field('Text', config_name='extends')
