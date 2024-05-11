@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from shop.views import *
 
 urlpatterns =[
-    path('admin/', admin.site.urls),
+    path('adminn/', admin.site.urls),
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),
     path('', home_view, name='home'),
     path('page', TemplateView.as_view(template_name='page1.html'), name='page1'),
