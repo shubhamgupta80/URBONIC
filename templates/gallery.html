@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+
+
+{% block content %}
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h3>{{gallery.image}}</h3>
+                <div class="card">
+                    <div class="card-body">
+                        {{ gallery.image|safe}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+    
