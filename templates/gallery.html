@@ -5,6 +5,8 @@
 <section class="my-5">
     <div class="container">
         <div class="row">
+            {% for item in gallery %}
+                
             <div class="col-md-8 mx-auto">
                 <h3>{{gallery.image}}</h3>
                 <div class="card">
@@ -13,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>

@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from .forms import ReviewForm
 from .models import *
+from .models import Gallery
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
@@ -128,6 +129,11 @@ def home_view(request):
     articles = Article.objects.all()[:3]
     products = Product.objects.all()[:9]
     return render(request, 'index.html', {'articles': articles, 'products': products})
+
+def gallery_view(request):
+    gallery= Gallery.objects.all()
+    return render(request, 'gallery.html', {'gallery': gallery})
+    
 
 
 
