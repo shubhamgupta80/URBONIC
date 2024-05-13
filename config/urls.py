@@ -24,7 +24,9 @@ urlpatterns =[
     path('article/<int:pk>',article_view , name="article"),
     path('article/all', article_all_view, name="articles"),
     path('checkout', checkout_view, name='checkout'),
-
+    path('api/create/checkout/', create_checkout_session, name='create_checkout_session'),
+    path('success/', success_view, name='success'),
+    path('cancel/', cancel_view, name='cancel'),
     ]
 
 if settings.DEBUG:

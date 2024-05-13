@@ -74,8 +74,10 @@
 
 
 <!-- <script src="checkout.js"></script> -->
+<script src="https://js.stripe.com/v3" async></script>
 <script>
     $(document).ready(function() {
+        var strip_pk = `{{stripe_pk}}`;
         var userId = "{{request.user.id}}"
         var items = JSON.parse(localStorage.getItem(`items_${userId}`)) || [];
         var totalQuantity = items.reduce((acc, item) => acc + parseInt(item.quantity), 0);
@@ -86,7 +88,7 @@
         // display
         items.forEach(item => {
             var itemElement = `
-                <div class="item">
+                <div class="item" data-id="${item.id}">
                     <img src="${item.img}">
                     <div class="info">
                         <div class="name">${item.name}</div>
@@ -97,6 +99,47 @@
                 </div>
             `;
             $(".list").append(itemElement);
+        });
+        // get session id via fetch
+        $(".buttonCheckout").click(function() {
+            // show spinner in button
+            $(this).text(`
+                <div class="spinner-border text-light" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            `);
+            var phone = $("#phone").val();
+            var address = $("#address").val();
+            // get selected value for country and city from select element
+            var country = "";
+            var city = "";
+
+            let body = {
+                items: items,
+                totalQuantity: totalQuantity,
+                totalPrice: totalPrice,
+                phone: phone,
+                address: address,
+                country: country,
+                city: city
+            }
+            let csrfToken = "{{ csrf_token }}";
+            let options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken
+                },
+                body: JSON.stringify(body)
+            }
+            fetch("{% url 'create_checkout_session' %}", options)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                var sessionId = data.sessionId;
+                var stripe = Stripe(strip_pk);
+                stripe.redirectToCheckout({ sessionId: sessionId });
+            });
         });
     });
 </script>

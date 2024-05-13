@@ -7,6 +7,8 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import dotenv
 import stripe
 import os
@@ -14,10 +16,120 @@ from django.conf import settings
 import json
 from django.core.mail import send_mail
 
+
+from django.http import JsonResponse
+@csrf_exempt
+@login_required
+def create_checkout_session(request):
+    # clear session
+    request.session['prod_ids'] = []
+    # grab json data from the request
+    data = json.loads(request.body)
+    print(data)
+    base_url = request.build_absolute_uri('/')[:-1]
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    print(stripe.api_key)
+    YOUR_DOMAIN = base_url
+    user = request.user
+    print(user)
+    totalPrice = data.get('totalPrice')
+    qty = data.get('totalQuantity',1)
+    prod_ids = []
+    for item in data.get('items'):
+        prod_ids.append(item.get('id'))
+    # store ids in session
+    request.session['prod_ids'] = prod_ids
+    request.session['totalPrice'] = totalPrice
+    request.session['qty'] = qty
+    request.session['phone'] = data.get('phone')
+    request.session['address'] = data.get('address')   
+    request.session['city'] = data.get('city')
+    request.session['country'] = data.get('country')
+    currency = 'inr'
+    # create a checkout session
+    checkout_session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        mode='payment',
+        success_url=f'{base_url}/success/',
+        cancel_url=f'{base_url}/cancel/',
+        # customer name and info
+        line_items=[
+            {
+                'price_data': {
+                    'currency': currency,
+                    'product_data': {
+                        'name': 'Flora Subscription',
+                    },
+                    'unit_amount': int(totalPrice*100),
+                },
+                'quantity': 1,
+            },
+        ],
+        customer_email= user.email,
+        billing_address_collection='required',
+    )
+    return JsonResponse({'sessionId': checkout_session.id})
+
+def success_view(request):
+    prod_ids = request.session.get('prod_ids')
+    products = Product.objects.filter(id__in=prod_ids)
+    totalPrice = request.session.get('totalPrice')
+    qty = request.session.get('qty')
+    phone = request.session.get('phone')
+    address = request.session.get('address')
+    city = request.session.get('city')
+    country = request.session.get('country')
+
+    order = Order(
+        user=request.user,
+        amount=totalPrice,
+        phone=phone,
+        address=address,
+        city=city,
+        country=country
+    )
+    order.save()
+    # create a new order item
+    for prod_id in prod_ids:
+        product = Product.objects.get(id=prod_id)
+        order_item = OrderItem(
+            order=order,
+            product=product,
+            quantity=qty,
+            price=product.price
+        )
+        order_item.save()
+    
+    return render(request, 'success.html', {
+        'products': products,
+        'totalPrice': totalPrice,
+        'qty': qty,
+        'phone': phone,
+        'address': address,
+        'city': city,
+        'country': country
+    })
+
+def cancel_view(request):
+    # clear session
+    clear_order_sesion(request)
+    return render(request, 'cancel.html')
+
+def clear_order_sesion(request):
+    request.session['prod_ids'] = []
+    request.session['totalPrice'] = 0
+    request.session['qty'] = 0
+    request.session['phone'] = ''
+    request.session['address'] = ''
+    request.session['city'] = ''
+    request.session['country'] = '' 
+
 def home_view(request):
     articles = Article.objects.all()[:3]
     products = Product.objects.all()[:9]
     return render(request, 'index.html', {'articles': articles, 'products': products})
+
+
 
 
 # Create your views here.
@@ -141,5 +253,8 @@ def article_all_view(request):
         'articles' : articles
     })
 
+@login_required
 def checkout_view(request):
-    return render(request, 'checkout.html')
+    return render(request, 'checkout.html', {
+        'stripe_pk': settings.STRIPE_PUBLIC_KEY
+    })

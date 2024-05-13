@@ -314,7 +314,7 @@
 				<img src="{{item.image.url}}" alt="">
 				<h2>{{item.title}}</h2>
 				<div class="price">Rs. {{item.price}}</div>
-				<button class="addToCart">Add To Cart</button>
+				<button class="addToCart" data-id="{{item.id}}">Add To Cart</button>
 			</div>
 			{% endfor %}
 		</div>
@@ -359,6 +359,7 @@
 				var img = $(this).parent().find("img").attr("src");
 				var name = $(this).parent().find("h2").text();
 				var price = $(this).parent().find(".price").text();
+				var id = $(this).data("id");
 				var quantity = 1;
 				// cartItems.push({
 				// 	img: img,
@@ -367,7 +368,7 @@
 				// 	quantity: quantity
 				// });
 				var item = `
-				<div class="item">
+				<div class="item" data-id="${id}">
 					<img src="${img}">
 					<div class="content">
 						<div class="name">${name}</div>
@@ -410,11 +411,13 @@
 					var name = $(this).find(".name").text();
 					var price = $(this).find(".price").text();
 					var quantity = $(this).find(".quantity .value").text();
+					var id = $(this).data("id");
 					items.push({
 						img: img,
 						name: name,
 						price: price,
-						quantity: quantity
+						quantity: quantity,
+						id: id
 					});
 				});
 				localStorage.setItem(`items_${userId}`, JSON.stringify(items));
