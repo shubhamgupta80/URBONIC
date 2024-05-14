@@ -44,8 +44,7 @@
                 <div class="group">
                     <label for="country">Country</label>
                     <select name="country" id="country">
-                        <option value="">Choose..</option>
-                        <option value="">Kingdom</option>
+                        <option value="">Asia</option>
                     </select>
                 </div>
     
@@ -53,7 +52,40 @@
                     <label for="city">City</label>
                     <select name="city" id="city">
                         <option value="">Choose..</option>
-                        <option value="">London</option>
+                        <option value="">Lucknow</option>
+                        <option value="">Delhi</option>
+                        <option value="">Mumbai</option>
+                        <option value="">Kolkata</option>
+                        <option value="">Kanpur</option>
+                        <option value="">Bangalore</option>
+                        <option value="">Hyderabad</option>
+                        <option value="">Chennai</option>
+                        <option value="">Pune</option>
+                        <option value="">Ahmedabad</option>
+                        <option value="">Jaipur</option>
+                        <option value="">Surat</option>
+                        <option value="">Kochi</option>
+                        <option value="">Patna</option>
+                        <option value="">Indore</option>
+                        <option value="">Bhopal</option>
+                        <option value="">Nagpur</option>
+                        <option value="">Vadodara</option>
+                        <option value="">Ludhiana</option>
+                        <option value="">Agra</option>
+                        <option value="">Nashik</option>
+                        <option value="">Faridabad</option>
+                        <option value="">Meerut</option>
+                        <option value="">Rajkot</option>
+                        <option value="">Kalyan-Dombivali</option>
+                        <option value="">Vasai-Virar</option>
+                        <option value="">Varanasi</option>
+                        <option value="">Srinagar</option>
+                        <option value="">Aurangabad</option>
+                        <option value="">Dhanbad</option>
+                        <option value="">Amritsar</option>
+                        <option value="">Navi Mumbai</option>
+                        <option value="">Allahabad</option>
+                        <option value="">Ranchi</option>
                     </select>
                 </div>
             </div>
@@ -103,11 +135,7 @@
         // get session id via fetch
         $(".buttonCheckout").click(function() {
             // show spinner in button
-            $(this).text(`
-                <div class="spinner-border text-light" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            `);
+            $(this).html(`<i class="fa fa-spinner fa-spin">Loading...</i>`);
             var phone = $("#phone").val();
             var address = $("#address").val();
             // get selected value for country and city from select element
