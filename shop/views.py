@@ -190,7 +190,7 @@ def vendor_login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('vendor_login')
+    return redirect('home')
 
 def user_login_view(request):
     if request.method == 'POST':
