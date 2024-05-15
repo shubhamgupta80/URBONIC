@@ -27,6 +27,7 @@ urlpatterns =[
     path('api/create/checkout/', create_checkout_session, name='create_checkout_session'),
     path('success/', success_view, name='success'),
     path('cancel/', cancel_view, name='cancel'),
+    path('gallery/', gallery_view, name='gallery'),
     ]
 
 if settings.DEBUG:

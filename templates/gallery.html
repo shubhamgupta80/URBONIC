@@ -6,13 +6,9 @@
     <div class="container">
         <div class="row">
             {% for item in gallery %}
-                
-            <div class="col-md-8 mx-auto">
-                <h3>{{gallery.image}}</h3>
+            <div class="col-md-3 mx-auto mb-3">
                 <div class="card">
-                    <div class="card-body">
-                        {{ gallery.image|safe}}
-                    </div>
+                    <img src="{{item.image.url}}" alt="" class="card-img" style="height: 300px;object-fit:cover">
                 </div>
             </div>
             {% endfor %}
