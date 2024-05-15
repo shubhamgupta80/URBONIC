@@ -59,7 +59,7 @@ def create_checkout_session(request):
                 'price_data': {
                     'currency': currency,
                     'product_data': {
-                        'name': 'Flora Subscription',
+                        'name': 'URBONIC Products',
                     },
                     'unit_amount': int(totalPrice*100),
                 },
